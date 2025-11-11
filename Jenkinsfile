@@ -4,6 +4,11 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-login') 
         DOCKERHUB_USERNAME = 'janidu007' 
+        environment {
+        PATH = "/usr/local/bin:/usr/local/sbin:/opt/homebrew/bin:$PATH"
+        JAVA_HOME = "/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home"
+}
+
     }
 
     stages {
