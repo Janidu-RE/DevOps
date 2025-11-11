@@ -15,7 +15,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    image: janidu/salon-backend:latest  
+    image: janidu007/salon-backend:latest  
     container_name: salon-backend
     ports:
       - "9090:9090"
