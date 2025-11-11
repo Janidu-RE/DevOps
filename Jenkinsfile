@@ -13,6 +13,12 @@ pipeline {
             }
         }
 
+        stage('Build Backend Jar') {
+            steps {
+                sh 'cd backend && ./mvnw clean package -DskipTests'
+            }
+        }
+
         stage('Build Docker Images from Compose') {
             steps {
                 script {
