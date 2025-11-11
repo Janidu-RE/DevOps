@@ -17,7 +17,7 @@ services:
       dockerfile: Dockerfile
     container_name: salon-backend
     ports:
-      - "8080:9090"
+      - "9090:9090"
     environment:
       SPRING_DATA_MONGODB_URI: mongodb://mongodb:27017/salonAPI
       SPRING_DATA_MONGODB_DATABASE: salonAPI

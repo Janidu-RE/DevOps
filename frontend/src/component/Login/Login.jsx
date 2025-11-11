@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,14 +21,14 @@ const Login = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:8080/api/auth/login", {
+      const res = await axios.post("http://localhost:9090/api/auth/login", {
         usernameOrEmail: username,
         password: password,
       });
 
       console.log(res);
       if (res.data.username) {
-        setSuccess("Welcome back, " + res.data.username+"!");
+        setSuccess("Welcome back, " + res.data.username + "!");
         setError("");
 
         localStorage.setItem(
@@ -35,7 +38,11 @@ const Login = () => {
             role: res.data.role,
           })
         );
-        // Redirect or update app state here
+        
+        setTimeout(() => {
+          navigate("/"); 
+        }, 1000);
+
       } else {
         setError(res.data.message || "Invalid Login");
       }
@@ -51,14 +58,18 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gradient-to-br from-blue-500 to-purple-600">
-      <div className="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-md">
-        <h1 className="text-4xl font-bold text-center text-blue-600 mb-6">
+    // Use a soft, professional background
+    <div className="flex items-center justify-center h-screen bg-stone-100">
+      {/* Use a softer shadow and a rounded-xl for a more elegant card */}
+      <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md">
+        <h1 className="text-4xl font-bold text-center text-emerald-700 mb-6">
           Welcome Back 👋
         </h1>
         <p className="text-center text-gray-500 mb-8">
           Please enter your credentials to log in.
         </p>
+
+        {/* Status messages (unchanged, they are standard and clear) */}
         {success && (
           <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
             {success}
@@ -80,7 +91,8 @@ const Login = () => {
               placeholder="Enter your username or email"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              // Update the focus ring to match the new accent color
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               required
             />
           </div>
@@ -94,23 +106,26 @@ const Login = () => {
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              // Update the focus ring to match the new accent color
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               required
             />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2.5 rounded-lg font-semibold hover:bg-blue-700 transition duration-300 shadow-md"
+            // Use the new emerald accent color for the primary button
+            className="w-full bg-emerald-600 text-white py-2.5 rounded-lg font-semibold hover:bg-emerald-700 transition duration-300 shadow-md"
           >
             Log In
           </button>
 
           <p className="text-center text-gray-500 text-sm">
             Don't have an account?{" "}
-            <a href="#" className="text-blue-600 hover:underline font-medium">
+            {/* Update the link color to match */}
+            <Link to="/signup" className="text-emerald-600 hover:underline font-medium">
               Sign up
-            </a>
+            </Link>
           </p>
         </form>
       </div>
