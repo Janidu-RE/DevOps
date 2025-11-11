@@ -39,8 +39,8 @@ pipeline {
         stage('Push Images to Docker Hub') {
             steps {
                 script {
-                    def frontendImage = "${DOCKERHUB_USERNAME}/frontend-app:latest"
-                    def backendImage = "${DOCKERHUB_USERNAME}/backend-app:latest"
+                    def frontendImage = "${DOCKERHUB_USERNAME}/salon-frontend:latest"
+                    def backendImage = "${DOCKERHUB_USERNAME}/salon-backend:latest"
 
                     sh """
                     docker push ${frontendImage}
